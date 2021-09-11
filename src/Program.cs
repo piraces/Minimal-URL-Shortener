@@ -1,12 +1,7 @@
-using System;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.AspNetCore.Http;
 using LiteDB;
-using System.Threading.Tasks;
-using System.Linq;
 using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.FileProviders;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddSingleton<ILiteDatabase, LiteDatabase>(_ => new LiteDatabase("short-links.db"));
@@ -26,6 +21,16 @@ app.MapGet("/", ctx =>
 
 // API endpoint for shortening a URL and save it to a local database
 app.MapPost("/url", ShortenerDelegate);
+
+var assemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+var assetDirectory = Path.Combine(assemblyDirectory, "assets");
+
+// use it
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(assetDirectory),
+    RequestPath = "/assets"
+});
 
 // Catch all page: redirecting shortened URL to its original address
 app.MapFallback(RedirectDelegate);

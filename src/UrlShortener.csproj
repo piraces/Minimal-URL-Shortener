@@ -10,52 +10,52 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Update="android-chrome-192x192.png">
+        <None Update="assets\android-chrome-192x192.png">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="android-chrome-512x512.png">
+        <None Update="assets\android-chrome-512x512.png">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="apple-touch-icon-precomposed.png">
+        <None Update="assets\apple-touch-icon-precomposed.png">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="apple-touch-icon.png">
+        <None Update="assets\apple-touch-icon.png">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="browserconfig.xml">
+        <None Update="assets\browserconfig.xml">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="favicon-16x16.png">
+        <None Update="assets\favicon-16x16.png">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="favicon-32x32.png">
+        <None Update="assets\favicon-32x32.png">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="favicon.ico">
+        <None Update="assets\favicon.ico">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
         <None Update="index.html">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="mstile-144x144.png">
+        <None Update="assets\mstile-144x144.png">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="mstile-150x150.png">
+        <None Update="assets\mstile-150x150.png">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="mstile-310x150.png">
+        <None Update="assets\mstile-310x150.png">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="mstile-310x310.png">
+        <None Update="assets\mstile-310x310.png">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="mstile-70x70.png">
+        <None Update="assets\mstile-70x70.png">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="safari-pinned-tab.svg">
+        <None Update="assets\safari-pinned-tab.svg">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
-        <None Update="site.webmanifest">
+        <None Update="assets\site.webmanifest">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
     </ItemGroup>
