@@ -350,3 +350,4 @@ MigrationBackup/
 
 # Custom ignores
 out/
+launchSettings.json
