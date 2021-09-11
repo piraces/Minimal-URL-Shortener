@@ -22,8 +22,8 @@ jobs:
       with:
         dotnet-version: '6.0.x'
         include-prerelease: true
-    - run: dotnet restore
-    - run: dotnet publish -c Release -o /out --no-restore
+    - run: dotnet restore ./src
+    - run: dotnet publish ./src -c Release -o ./out --no-restore
     - name: 'Deploy to Azure WebApp'
       uses: azure/webapps-deploy@v2
       with:
