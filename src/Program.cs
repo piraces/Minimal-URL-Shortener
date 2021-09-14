@@ -21,6 +21,7 @@ app.MapGet("/", ctx =>
 
 // API endpoint for shortening a URL and save it to a local database
 app.MapPost("/url", ShortenerDelegate);
+app.MapGet("/url/{longUrl}", ShortenerDelegate);
 
 var assemblyDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 var assetDirectory = Path.Combine(assemblyDirectory, "assets");
@@ -39,9 +40,20 @@ await app.RunAsync();
 
 static async Task ShortenerDelegate(HttpContext httpContext)
 {
-    var request = await httpContext.Request.ReadFromJsonAsync<UrlDto>();
+    var rawRequest = false;
+    var url = string.Empty;
 
-    if (!Uri.TryCreate(request.Url, UriKind.Absolute, out var inputUri))
+    if (httpContext.Request.RouteValues.TryGetValue("longUrl", out var longUrl))
+    {
+        url = longUrl.ToString();
+        rawRequest = true;
+    } else {
+        var request = await httpContext.Request.ReadFromJsonAsync<UrlDto>();
+        url = request.Url;
+    }
+    
+
+    if (!Uri.TryCreate(url, UriKind.Absolute, out var inputUri))
     {
         httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
         await httpContext.Response.WriteAsync("URL is invalid.");
@@ -54,7 +66,11 @@ static async Task ShortenerDelegate(HttpContext httpContext)
     links.Insert(entry);
 
     var result = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/{entry.UrlChunk}";
-    await httpContext.Response.WriteAsJsonAsync(new { url = result });
+    if (rawRequest) {
+        await httpContext.Response.WriteAsync(result);
+    } else {
+        await httpContext.Response.WriteAsJsonAsync(new { url = result });
+    }
 }
 
 static async Task RedirectDelegate(HttpContext httpContext)

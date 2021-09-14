@@ -1,10 +1,22 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shortalink!</title>
     <link rel="stylesheet" href="https://unpkg.com/mvp.css" />
+
+    <meta name="description" content="Simple & Anonymous URL shortener">
+    <meta property="og:title" content="Shortalink!">
+    <meta property="og:description" content="Simple & Anonymous URL shortener">
+    <meta property="og:image" content="https://shorta.link/assets/android-chrome-512x512.png">
+    <meta property="og:image:alt" content="Shortalink! Logo">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:url" content="https://shorta.link">
+    <link rel="canonical" href="https://shorta.link">
+
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
@@ -12,65 +24,65 @@
     <link rel="mask-icon" href="/assets/safari-pinned-tab.svg" color="#5bbad5">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
-  </head>
+</head>
 
-  <body>
+<body>
     <header>
-      <h1>Shortalink!</h1>
+        <h1>Shortalink!</h1>
     </header>
     <main>
-      <section>
-        <aside id="urlForm" style="width: 25rem">
-          <label>
-            Enter your link below to retrieve its short URL:
-            <input
-              type="url"
-              id="url"
-              name="url"
-              style="width: 22rem; margin: 0.5rem 0"
-            />
-          </label>
+        <section>
+            <aside id="urlForm" style="width: 25rem">
+                <label>
+                    Enter your link below to retrieve its short URL:
+                    <input type="url"
+                           id="url"
+                           name="url"
+                           style="width: 22rem; margin: 0.5rem 0" />
+                </label>
 
-          <button
-            type="button"
-            onclick="submitUrl()"
-            style="padding: 0.5rem 1rem"
-          >
-            Shorten
-          </button>
-          <p id="urlResult"></p>
-        </aside>
-      </section>
+                <button type="button"
+                        onclick="submitUrl()"
+                        style="padding: 0.5rem 1rem">
+                    Shorten
+                </button>
+                <p id="urlResult"></p>
+                <p id="urlError"></p>
+            </aside>
+        </section>
     </main>
     <script>
-      document
-        .getElementById('url')
-        .addEventListener('keyup', function (event) {
-          if (event.code === 'Enter') {
-            event.preventDefault();
-            submitUrl();
-          }
-        });
+        document
+            .getElementById('url')
+            .addEventListener('keyup', function (event) {
+                if (event.code === 'Enter') {
+                    event.preventDefault();
+                    submitUrl();
+                }
+            });
 
-      function submitUrl() {
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', '/url', true);
-        xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+        function submitUrl() {
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/url', true);
+            xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
 
-        xhr.onreadystatechange = function () {
-          if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-              const url = JSON.parse(xhr.responseText).url;
-              const section = document.getElementById('urlResult');
-              section.innerHTML = `<a id="link" href="${url}">${url}</a>`;
-            } else {
-              alert(xhr.responseText);
-            }
-          }
-        };
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                    const section = document.getElementById('urlResult');
+                    if (xhr.status === 200) {
+                        const url = JSON.parse(xhr.responseText).url;
+                        section.innerHTML = `<a id="link" href="${url}">${url}</a>`;
+                        errorSection.innerHTML = '';
+                    } else {
+                        const errorSection = document.getElementById('urlError');
+                        section.innerHTML = '';
+                        errorSection.innerHTML = `<div>${xhr.responseText}</div>`;
+                    }
+                }
+            };
 
-        xhr.send(JSON.stringify({ url: document.getElementById('url').value }));
-      }
+            xhr.send(JSON.stringify({ url: document.getElementById('url').value }));
+        }
     </script>
-  </body>
+</body>
 </html>
