@@ -34,6 +34,9 @@
         <None Update="assets\favicon.ico">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
+        <None Update="assets\maskable_icon.png">
+          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
         <None Update="index.html">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Shortalink!</title>
-    <link rel="stylesheet" href="https://unpkg.com/mvp.css" />
+    <link rel="preload" href="https://unpkg.com/mvp.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/mvp.css"></noscript>
 
     <meta name="description" content="Simple & Anonymous URL shortener">
     <meta property="og:title" content="Shortalink!">
@@ -43,7 +44,7 @@
 
                 <button type="button"
                         onclick="submitUrl()"
-                        style="padding: 0.5rem 1rem">
+                        style="background-color: #000000; border: 2px solid #000000; color: #ffffff; padding: 0.5rem 1rem">
                     Shorten
                 </button>
                 <p id="urlResult"></p>
