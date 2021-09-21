@@ -72,6 +72,7 @@ static async Task ShortenerDelegate(HttpContext httpContext)
     var links = liteDb.GetCollection<ShortUrl>(BsonAutoId.Int32);
     var entry = new ShortUrl(inputUri);
     links.Insert(entry);
+    links.Update(entry);
 
     var result = $"{httpContext.Request.Scheme}://{httpContext.Request.Host}/{entry.UrlChunk}";
     if (rawRequest) {
